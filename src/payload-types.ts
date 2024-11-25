@@ -30,7 +30,6 @@ export interface Config {
     media: Media;
     role: Role;
     resource: Resource;
-    author: Author;
     article: Article;
     comment: Comment;
     'payload-locked-documents': PayloadLockedDocument;
@@ -43,7 +42,6 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     role: RoleSelect<false> | RoleSelect<true>;
     resource: ResourceSelect<false> | ResourceSelect<true>;
-    author: AuthorSelect<false> | AuthorSelect<true>;
     article: ArticleSelect<false> | ArticleSelect<true>;
     comment: CommentSelect<false> | CommentSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -156,20 +154,6 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "author".
- */
-export interface Author {
-  id: number;
-  name?: string | null;
-  role?: {
-    relationTo: 'role';
-    value: number | Role;
-  } | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "article".
  */
 export interface Article {
@@ -177,8 +161,8 @@ export interface Article {
   title?: string | null;
   body?: string | null;
   author?: {
-    relationTo: 'author';
-    value: number | Author;
+    relationTo: 'users';
+    value: number | User;
   } | null;
   comments?:
     | {
@@ -223,10 +207,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'resource';
         value: number | Resource;
-      } | null)
-    | ({
-        relationTo: 'author';
-        value: number | Author;
       } | null)
     | ({
         relationTo: 'article';
@@ -342,16 +322,6 @@ export interface RoleSelect<T extends boolean = true> {
  */
 export interface ResourceSelect<T extends boolean = true> {
   resourceName?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "author_select".
- */
-export interface AuthorSelect<T extends boolean = true> {
-  name?: T;
-  role?: T;
   updatedAt?: T;
   createdAt?: T;
 }

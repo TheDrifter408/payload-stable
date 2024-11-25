@@ -2,6 +2,9 @@ import { CollectionConfig } from "payload";
 
 export const Article:CollectionConfig = {
     slug:"article",
+    admin:{
+        useAsTitle:"title"
+    },
     fields:[
         {
             name:"title",
@@ -14,7 +17,7 @@ export const Article:CollectionConfig = {
         {
             name:"author",
             type:"relationship",
-            relationTo:["author"],
+            relationTo:["users"],
         },
         {
             name:"comments",
