@@ -1,7 +1,14 @@
+import { canCreate, canDelete, canRead, canUpdate } from "@/access/DynamicAccess";
 import { CollectionConfig } from "payload";
 
 export const Role:CollectionConfig = {
     slug:"role",
+    access:{
+        create:canCreate("role"),
+        read:canRead("role"),
+        update:canUpdate("role"),
+        delete:canDelete("role"),
+    },
     admin:{
         useAsTitle:'roleName'
     },

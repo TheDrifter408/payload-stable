@@ -4,7 +4,7 @@ import { isAdmin } from "./isAdmin";
 
 export const canCreate = (resourceName:string):Access<User> => ({ req:{ user }}) => {
     if(user && typeof user.role?.value !== 'number'){
-        if(isAdmin(user)){
+        if(isAdmin(user)){  
             return true;
         } else {
             let permission: boolean | null | undefined = null;

@@ -1,7 +1,14 @@
+import { canCreate, canDelete, canRead, canUpdate } from "@/access/DynamicAccess";
 import { CollectionConfig } from "payload";
 
 export const Comment:CollectionConfig = {
     slug:"comment",
+    access: {
+        create: canCreate("comment"),
+        read: canRead("comment"),
+        update: canUpdate("comment"),
+        delete: canDelete("comment")
+    },
     fields:[
         {
             name:"title",
