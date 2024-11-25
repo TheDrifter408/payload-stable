@@ -30,6 +30,9 @@ export interface Config {
     media: Media;
     role: Role;
     resource: Resource;
+    author: Author;
+    article: Article;
+    comment: Comment;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -40,6 +43,9 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     role: RoleSelect<false> | RoleSelect<true>;
     resource: ResourceSelect<false> | ResourceSelect<true>;
+    author: AuthorSelect<false> | AuthorSelect<true>;
+    article: ArticleSelect<false> | ArticleSelect<true>;
+    comment: CommentSelect<false> | CommentSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -82,6 +88,11 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: number;
+  name?: string | null;
+  role?: {
+    relationTo: 'role';
+    value: number | Role;
+  } | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -92,25 +103,6 @@ export interface User {
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: number;
-  alt: string;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -145,6 +137,72 @@ export interface Permissions {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "author".
+ */
+export interface Author {
+  id: number;
+  name?: string | null;
+  role?: {
+    relationTo: 'role';
+    value: number | Role;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "article".
+ */
+export interface Article {
+  id: number;
+  title?: string | null;
+  body?: string | null;
+  author?: {
+    relationTo: 'author';
+    value: number | Author;
+  } | null;
+  comments?:
+    | {
+        relationTo: 'comment';
+        value: number | Comment;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "comment".
+ */
+export interface Comment {
+  id: number;
+  title?: string | null;
+  body?: string | null;
+  commenter?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -165,6 +223,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'resource';
         value: number | Resource;
+      } | null)
+    | ({
+        relationTo: 'author';
+        value: number | Author;
+      } | null)
+    | ({
+        relationTo: 'article';
+        value: number | Article;
+      } | null)
+    | ({
+        relationTo: 'comment';
+        value: number | Comment;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -213,6 +283,8 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -270,6 +342,39 @@ export interface RoleSelect<T extends boolean = true> {
  */
 export interface ResourceSelect<T extends boolean = true> {
   resourceName?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "author_select".
+ */
+export interface AuthorSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "article_select".
+ */
+export interface ArticleSelect<T extends boolean = true> {
+  title?: T;
+  body?: T;
+  author?: T;
+  comments?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "comment_select".
+ */
+export interface CommentSelect<T extends boolean = true> {
+  title?: T;
+  body?: T;
+  commenter?: T;
   updatedAt?: T;
   createdAt?: T;
 }

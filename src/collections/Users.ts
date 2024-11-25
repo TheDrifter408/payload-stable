@@ -7,6 +7,15 @@ export const Users: CollectionConfig = {
   },
   auth: true,
   fields: [
-    
+    {
+      name:"name",
+      type:"text"
+    },
+    {
+      name:"role",
+      type:"relationship",
+      relationTo:['role'],
+      saveToJWT:true,
+    }
   ],
 }
