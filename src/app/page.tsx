@@ -1,16 +1,15 @@
 import { User } from "@/payload-types";
 import Link from "next/link";
-//importing getPayload and config to initialize payload
-import { getPayload, PaginatedDocs } from "payload";
+import { PaginatedDocs } from "payload";
+import { getPayload } from "payload";
 import config from "@payload-config";
 
 export default async function Home(){
-    
-    //Initializing payload
+    //initializing payloadHMR
     const payload = await getPayload({ config });
-    //fetching users
+    //Using payload to request data 
     const users:PaginatedDocs<User> = await payload.find({
-        collection:'users'
+        collection:"users"
     });
     
     return(
@@ -23,14 +22,13 @@ export default async function Home(){
             <h1>Users</h1>
             <article>
                 <ul>
-                    {   users ?
+                    {
                         users.docs.map((user:User) => (
                             <li key={user.id}>
                                 <p>Name: {user.name}</p>
                                 <p>Email: {user.email}</p>
                             </li>
-                        )) :
-                        <li>No Data</li>
+                        ))
                     }
                 </ul>
             </article>
