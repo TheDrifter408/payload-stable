@@ -13,6 +13,8 @@ export default async function Home(){
     });
     
     return(
+        <body>
+        <main>
         <section>
             <h1>Home Page</h1>
             <Link href="/login"> Login </Link>
@@ -33,5 +35,7 @@ export default async function Home(){
                 </ul>
             </article>
         </section>
+        </main>            
+        </body>
     )
 }

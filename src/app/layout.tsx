@@ -5,18 +5,15 @@ export const metadata: Metadata = {
     description:"Payload/NextJS CMS"
 }
 
-export default function RootLayout({
-    children
-} : Readonly<{
-    children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children:React.ReactNode }){
+    
     return (
         <html lang="en">
             <body>
-                <div id="root">
-                    {children}
-                </div>
+                {children}
             </body>
         </html>
+        
     )
+    
 }
