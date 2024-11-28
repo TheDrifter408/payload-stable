@@ -56,6 +56,8 @@ We can restrict who can perform operations on the table by passing functions to 
 
 `canCreate`, `canRead`, `canUpdate`, `canDelete` and `isAdmin` are all functions that I had defined to configure access on the tables defined. These can be found in the `/src/access` directory. 
 
+To make it so that only certain users get access, I passed the `slug` of the table to the functions. These functions then check the logged in user's role and if the user has create,read,update and delete permissions for the particular table. 
+
 ## Further Research and Testing
 While creating tables and controlling access like this seems intuitive and easy now further testing is required to check how well the access actually works i.e security and test it by simulating real world scenarios and observing how well it works in those.
 
