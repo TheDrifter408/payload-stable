@@ -1,5 +1,5 @@
 # Payload CMS:
-It is an open source NodeJS-based CMS with a built-in, customizable admin panel. The founder made this as a response to Wordpress, particularly the recent copyright issues that have occured.
+It is an open source NodeJS-based [CMS](https://www.payloadcms.com) with a built-in, customizable admin panel. The founder made this as a response to Wordpress, particularly the recent copyright issues that have occured.
 
 ## Declaritive Tables:
 Configuring database tables means to create a `collection.ts` in the `collections/` directory. For example, to create a table of articles we do the following:
