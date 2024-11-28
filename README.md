@@ -58,3 +58,11 @@ We can restrict who can perform operations on the table by passing functions to 
 
 ## Further Research and Testing
 While creating tables and controlling access like this seems intuitive and easy now further testing is required to check how well the access actually works i.e security and test it by simulating real world scenarios and observing how well it works in those.
+
+### Running this Project:
+To run this project locally configure the `.env` **DATABASE_URI** to be the connection string to your database postgres or mongo db database. The **PAYLOAD_SECRET** is required as this string is used to encrypt the API keys.  
+Clone this Repository and run the following:
+```bash
+yarn install
+yarn dev
+```
